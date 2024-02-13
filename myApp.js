@@ -26,7 +26,7 @@ app.get('/', function (req, res) {
 app.get('/now', time, function (req, res) {
   const time = req.time;
 
-  res.json({ time });
+  res.send({ time });
 });
 
 app.get('/json', function (req, res) {
