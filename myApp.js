@@ -9,6 +9,10 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
+app.get('/json', function (req, res) {
+  res.json({ message: 'Hello json' });
+});
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
