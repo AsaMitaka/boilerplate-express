@@ -18,7 +18,7 @@ const time = (req, res, next) => {
 };
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(logger);
+// app.use(logger);
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
