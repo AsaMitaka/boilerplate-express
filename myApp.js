@@ -25,7 +25,12 @@ app.get('/', function (req, res) {
 });
 
 app.get('/now', time, function (req, res) {
-  res.json({ time: req.time });
+  setTimeout(function () {
+    //your code to be executed after 1 second
+    res.json({
+      time: req.time,
+    });
+  }, 1000);
 });
 
 app.get('/json', function (req, res) {
