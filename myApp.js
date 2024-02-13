@@ -24,7 +24,9 @@ app.get('/', function (req, res) {
 });
 
 app.get('/now', time, function (req, res) {
-  res.json({ time: req.time });
+  const time = req.time;
+
+  res.json({ time });
 });
 
 app.get('/json', function (req, res) {
