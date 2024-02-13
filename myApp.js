@@ -20,6 +20,7 @@ const time = (req, res, next) => {
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger);
 
 app.get('/', function (req, res) {
@@ -51,9 +52,7 @@ app.get('/:word/echo', function (req, res) {
 app
   .route('/name')
   .get(function (req, res) {
-    console.log(req.params);
     const { first, last } = req.query;
-    console.log(first, last);
     const fullName = first + ' ' + last;
 
     res.json({ name: fullName });
@@ -61,6 +60,7 @@ app
   .post(function (req, res) {
     const { first, last } = req.body;
     const fullName = `${first} ${last}`;
+
     res.json({ name: fullName });
   });
 
