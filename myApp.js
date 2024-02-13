@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3000;
+require('dotenv').config();
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
@@ -10,7 +11,13 @@ app.get('/', function (req, res) {
 });
 
 app.get('/json', function (req, res) {
-  res.json({ message: 'Hello json' });
+  let textMessage = 'Hello json';
+
+  if (process.env.MESSAGE_STYLE === 'uppercase') {
+    textMessage = textMessage.toUpperCase();
+  }
+
+  res.json({ message: textMessage });
 });
 
 app.listen(PORT, () => {
