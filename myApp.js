@@ -40,6 +40,12 @@ app.get('/json', function (req, res) {
   res.json({ message: textMessage });
 });
 
+app.get('/:word/echo', function (req, res) {
+  const { word } = req.params;
+
+  res.send({ echo: word });
+});
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
