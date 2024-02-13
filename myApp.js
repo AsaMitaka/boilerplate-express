@@ -12,7 +12,7 @@ function logger(req, res, next) {
 }
 
 function time(req, res, next) {
-  req.time = new Date().toString();
+  req.time = Date.now().toString();
   next();
 }
 
