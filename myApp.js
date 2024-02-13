@@ -1,15 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
 const PORT = 3000;
 require('dotenv').config();
 
-function logger(req, res, next) {
+const logger = (req, res, next) => {
   const { method, path, ip } = req;
   console.log(`${method} ${path} - ${ip}`);
 
   next();
-}
+};
 
 const time = (req, res, next) => {
   req.time = new Date().toString();
@@ -18,6 +19,7 @@ const time = (req, res, next) => {
 };
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 app.use(logger);
 
 app.get('/', function (req, res) {
@@ -45,6 +47,22 @@ app.get('/:word/echo', function (req, res) {
 
   res.send({ echo: word });
 });
+
+app
+  .route('/name')
+  .get(function (req, res) {
+    console.log(req.params);
+    const { first, last } = req.query;
+    console.log(first, last);
+    const fullName = first + ' ' + last;
+
+    res.json({ name: fullName });
+  })
+  .post(function (req, res) {
+    const { first, last } = req.body;
+    const fullName = `${first} ${last}`;
+    res.json({ name: fullName });
+  });
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
