@@ -13,6 +13,7 @@ function logger(req, res, next) {
 
 const time = (req, res, next) => {
   req.time = new Date().toString();
+
   next();
 };
 
@@ -24,7 +25,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/now', time, function (req, res) {
-  res.send({ time: req.time });
+  res.json({ time: req.time });
 });
 
 app.get('/json', function (req, res) {
