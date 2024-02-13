@@ -11,11 +11,20 @@ function logger(req, res, next) {
   next();
 }
 
+function time(req, res, next) {
+  req.time = new Date().toString();
+  next();
+}
+
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(logger);
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+app.get('/now', time, function (req, res) {
+  res.json({ time: req.time });
 });
 
 app.get('/json', function (req, res) {
